@@ -1,0 +1,84 @@
+{
+  "name": "reactspace",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/reactspace/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/reactspace",
+        "index": "apps/reactspace/src/index.html",
+        "baseHref": "/",
+        "main": "apps/reactspace/src/main.tsx",
+        "polyfills": "apps/reactspace/src/polyfills.ts",
+        "tsConfig": "apps/reactspace/tsconfig.app.json",
+        "assets": [
+          "apps/reactspace/src/favicon.ico",
+          "apps/reactspace/src/assets"
+        ],
+        "styles": ["apps/reactspace/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/reactspace/src/environments/environment.ts",
+              "with": "apps/reactspace/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "reactspace:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "reactspace:build:development"
+        },
+        "production": {
+          "buildTarget": "reactspace:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/reactspace/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/reactspace/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
