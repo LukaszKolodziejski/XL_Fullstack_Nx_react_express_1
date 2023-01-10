@@ -7,7 +7,7 @@ if (envFound.error) {
 export const environment = {
   production: false,
   port: parseInt(process.env.PORT, 10),
-  database: {
+  db: {
     protocol: process.env.DB_PROTOCOL,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
