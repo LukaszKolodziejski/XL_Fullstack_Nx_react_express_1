@@ -2,7 +2,12 @@
   "name": "fullstack",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start:web": "yarn nx run reactspace:serve",
+    "start:api": "yarn nx run api:serve",
+    "e2e": "yarn nx e2e reactspace-e2e --watch",
+    "test": "yarn nx test --watch"
+  },
   "private": true,
   "dependencies": {
     "core-js": "^3.6.5",
@@ -10,6 +15,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "regenerator-runtime": "0.13.7",
+    "styled-components": "^5.3.6",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
