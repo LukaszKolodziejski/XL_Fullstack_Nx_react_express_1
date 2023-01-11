@@ -1,29 +1,11 @@
 import * as express from 'express';
-// import { Ticket } from '@happyorg/data';
-
 import { MongoClient, ObjectId } from 'mongodb';
+import { environment } from './environments/environment';
 
-// const uri = "mongodb+srv://devrekru:eCyjhsokB1S5AVg8@cluster0.q0q3nf9.mongodb.net/devrekru?retryWrites=true&w=majority";
-const uri =
-  'mongodb+srv://devrekru:eCyjhsokB1S5AVg8@cluster0.q0q3nf9.mongodb.net/devrekru';
+const { db } = environment;
+const uri = `${db.protocol}://${db.user}:${db.password}@${db.host}/${db.user}`;
 
 const app = express();
-
-type Ticket = {
-  title: string;
-  id: number;
-};
-
-const tickets: Ticket[] = [
-  {
-    title: `Install updates`,
-    id: 1,
-  },
-  {
-    title: `Restore the backup lalala`,
-    id: 2,
-  },
-];
 
 app.get('/api/crawls', (req, res) => {
   MongoClient.connect(uri, (err, db) => {
@@ -58,7 +40,7 @@ app.get('/api/resource/:crawlId', (req, res) => {
   });
 });
 
-const port = process.env.port || 8084;
+const port = environment.port || 8084;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`);
 });
