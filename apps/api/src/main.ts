@@ -29,7 +29,6 @@ app.get('/api/resource/:crawlId', (req, res) => {
 
     db.db('devrekru')
       .collection('resources')
-      // .find({ crawl: new ObjectId('63b3f7a0f6a417b6bfd102b7') })
       .find({ crawl: new ObjectId(req.params.crawlId) })
       .toArray((err, result) => {
         if (err) throw err;
